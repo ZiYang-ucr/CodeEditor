@@ -144,7 +144,7 @@ class CodeFileEditor:
 
         insert_line = find_method_body_insert_line(root)
         if insert_line is None:
-            print("⚠️ 未找到合法的插入位置（未检测到方法体）")
+            print("未找到合法的插入位置（未检测到方法体）")
             return None
 
         # 调用 insert 函数直接在该行号插入代码
@@ -152,7 +152,7 @@ class CodeFileEditor:
             # 因为 insert 接口要求行号从1开始，所以将插入行号加1
             return self.insert(file_path, insert_line + 1, code)
         except SyntaxError as se:
-            print(f"❌ 插入后语法检查失败: {se}")
+            print(f"插入后语法检查失败: {se}")
             return None
 
     def insert(self, file_path: str, start_line: int, code: str) -> str:
@@ -217,34 +217,6 @@ class CodeFileEditor:
             f.write(new_content)
         return str(new_path)
 
-    # def update(self, file_path: str, start_line: int, end_line: int, new_code: str) -> str:
-        """
-        替换指定行范围的代码
-        :param file_path: 目标文件路径
-        :param start_line: 起始行（包含）
-        :param end_line: 结束行（包含）
-        :param new_code: 新的代码内容
-        :return: 新文件路径（原文件名_updated.ext）
-        """
-        path = Path(file_path)
-        with open(file_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        
-        start = max(1, min(start_line, len(lines)))
-        end = max(start, min(end_line, len(lines)))
-        
-        # 保证换行符正确
-        formatted_code = new_code.strip('\n') + '\n'
-        new_lines = lines[:start-1] + [formatted_code] + lines[end:]
-        new_content = ''.join(new_lines)
-        
-        if not self._validate_syntax(new_content):
-            raise SyntaxError("Update causes syntax errors")
-        
-        new_path = path.parent / f"{path.stem}_updated{path.suffix}"
-        with open(new_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        return str(new_path)
     def update(self, file_path: str, start_line: int, end_line: int, new_code: str) -> str:
         """
         替换指定行范围的代码（包含自动缩进）
@@ -297,18 +269,3 @@ class CodeFileEditor:
         end = max(start, min(end_line, len(lines)))
         
         return ''.join(lines[start-1:end])
-
-class MultiLangEditorFactory:
-    """多语言编辑器工厂"""
-    @classmethod
-    def get_editor(cls, lang: str) -> CodeFileEditor:
-        """
-        获取指定语言的编辑器实例
-        :param lang: 支持 'python', 'java', 'cpp', 'javascript'
-        """
-        lang = lang.lower()
-        supported_langs = ['python', 'java', 'cpp', 'javascript','c']
-        if lang not in supported_langs:
-            raise ValueError(f"Unsupported language: {lang}. Supported: {supported_langs}")
-        return CodeFileEditor(lang)
-
