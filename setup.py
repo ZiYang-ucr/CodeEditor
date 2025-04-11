@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='code-editor-sdk',
+    name='codeEditorSDK',
     version='0.1.0',
     description='Multi-language code editor SDK with Tree-sitter support',
     author='Ziyang',
