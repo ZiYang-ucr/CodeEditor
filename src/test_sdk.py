@@ -38,7 +38,7 @@ print("Multiplying instead of adding")
 return result
 """.strip()
     )
-print(f"生成文件: {new_file}")
+print(f"Generate files: {new_file}")
 
 java_editor = MultiLangEditorFactory.get_editor('Java')
 
@@ -65,5 +65,5 @@ switch(day) {
 }
 '''
 )
-print(f"case4: 插入 switch 语句成功: {case4}")
-print(f"生成文件: {result}")
+print(f"case4: insert switch statements success: {case4}")
+print(f"complete success: {result}")

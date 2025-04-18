@@ -2,7 +2,7 @@ public class HelloWorld {
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");
-        int day = 2; // <--- switch 插入之后
+        int day = 2;
     }
 
     public int add(int a, int b) {

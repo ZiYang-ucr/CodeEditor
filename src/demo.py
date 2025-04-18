@@ -1,18 +1,18 @@
-# demo.py 原始内容
+# demo.py
 def main():
     print("Hello World")
-    # 第3行原始内容
+    # Third lne comment
     x = 5
     y = 10
-    # 第5-7行原始内容
+    # 5-7 line comment
     for i in range(3):
         print(f"Loop {i}")
-    # 第10-15行内容
+    # 10-15 line comment 
     data = [1,2,3]
     result = sum(data)
     return result
 
-# 第20-25行旧函数
+# 20-25 line comment
 def old_function():
     print("This will be replaced")
     return True
